@@ -1,0 +1,26 @@
+import javax.persistence.*; 
+import java.io.Serializable; 
+@Entity // Mandamiento 1: Marcar como entidad 
+public class Desarrollador implements Serializable { // Mandamiento 2: Serializable  private static final long serialVersionUID = 1L; 
+ @Id // Clave primaria 
+ private String email; 
+ private String nombre; 
+ @Embedded // Incrustamos el objeto dirección 
+ private Direccion domicilio; 
+ @Transient // Este campo será ignorado por la base de datos 
+ private String tokenSesion; 
+ // Mandamiento 3: Constructor vacío OBLIGATORIO 
+ public Desarrollador() {} 
+ public Desarrollador(String nombre, String email) { 
+ this.nombre = nombre; 
+ this.email = email; 
+ } 
+ // Getters y Setters...
+
+} 
+@Embeddable // Marcamos esta clase como "incrustable" 
+public class Direccion implements Serializable { 
+ private String ciudad; 
+ private String calle; 
+ // Constructores, getters y setters... 
+} 

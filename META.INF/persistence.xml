@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
+    <!-- El nombre de la unidad "DevSquadPU" es el que usarás en tu código Java -->
+    <persistence-unit name="DevSquadPU" transaction-type="RESOURCE_LOCAL">
+        <!-- CRÍTICO: Aquí le decimos que no use Hibernate, sino ObjectDB -->
+        <provider>com.objectdb.jpa.Provider</provider>
+        
+        <!-- Opcional pero recomendado: listar las clases que son Entidades -->
+        <class>modelo.Desarrollador</class>
+        <class>modelo.Direccion</class>
+        
+        <properties>
+            <!-- ObjectDB creará un archivo .odb en esta ruta automáticamente -->
+            <property name="javax.persistence.jdbc.url" value="$objectdb/db/devsquad.odb"/>
+            <property name="javax.persistence.jdbc.user" value="admin"/>
+            <property name="javax.persistence.jdbc.password" value="admin"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+      

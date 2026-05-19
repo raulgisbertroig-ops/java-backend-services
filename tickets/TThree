@@ -1,0 +1,10 @@
+public List<Desarrollador> buscarPorCiudad(String ciudadBusqueda, EntityManager em) {  // Construimos la consulta JPQL 
+ // Fíjate cómo navegamos por el objeto: d.domicilio.ciudad 
+ String jpql = "SELECT d FROM Desarrollador d WHERE d.domicilio.ciudad = :ciudad";
+ TypedQuery<Desarrollador> query = em.createQuery(jpql, Desarrollador.class);   
+ // Asignamos el parámetro de forma segura 
+ query.setParameter("ciudad", ciudadBusqueda); 
+  
+ // Ejecutamos y retornamos la lista limpia 
+ return query.getResultList(); 
+} 

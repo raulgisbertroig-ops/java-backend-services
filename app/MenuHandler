@@ -1,0 +1,79 @@
+package app;
+
+import java.util.Scanner;
+import modelo.Desarrollador;
+import persistencia.DesarrolladorDAO;
+import java.util.List;
+
+public class MenuHandler {
+    private final DesarrolladorDAO dao;
+    private final Scanner scanner;
+
+    public MenuHandler() {
+        this.dao = new DesarrolladorDAO();
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void iniciar() {
+        boolean activo = true;
+        while (activo) {
+            imprimirMenu();
+            int opcion = leerOpcion();
+            
+            switch (opcion) {
+                case 1 -> crearDesarrollador();
+                case 2 -> listarTodos();
+                case 3 -> eliminarDesarrollador();
+                case 4 -> {
+                    System.out.println("Cerrando sistema...");
+                    activo = false;
+                }
+                default -> System.out.println("Error: Opción no válida.");
+            }
+        }
+    }
+
+    private void imprimirMenu() {
+        System.out.println("\n=== Gestión de Talento DevSquad ===");
+        System.out.println("1. Crear desarrollador");
+        System.out.println("2. Listar todos");
+        System.out.println("3. Eliminar");
+        System.out.println("4. Salir");
+        System.out.print("Seleccione: ");
+    }
+
+    private int leerOpcion() {
+        try {
+            int op = scanner.nextInt();
+            scanner.nextLine(); // Limpiar buffer
+            return op;
+        } catch (Exception e) {
+            scanner.nextLine();
+            return -1;
+        }
+    }
+
+    private void crearDesarrollador() {
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine();
+        Desarrollador d = new Desarrollador(nombre);
+        dao.crear(d);
+        System.out.println("Desarrollador persistido con éxito.");
+    }
+
+    private void listarTodos() {
+        List<Desarrollador> lista = dao.obtenerTodos();
+        if (lista.isEmpty()) {
+            System.out.println("No hay registros en ObjectDB.");
+        } else {
+            lista.forEach(System.out::println);
+        }
+    }
+
+    private void eliminarDesarrollador() {
+        System.out.print("Nombre del desarrollador a eliminar: ");
+        String nombre = scanner.nextLine();
+        dao.eliminar(nombre);
+        System.out.println("Proceso de eliminación completado.");
+    }
+}

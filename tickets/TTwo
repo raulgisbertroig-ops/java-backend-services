@@ -1,0 +1,24 @@
+// Variable global o estática en la clase de servicio 
+private static EntityManagerFactory emf = 
+ Persistence.createEntityManagerFactory("$objectdb/db/talento.odb"); 
+public void altaDesarrollador(Desarrollador dev) { 
+ // 1. Creamos el gestor ligero (El "Operario") 
+ EntityManager em = emf.createEntityManager(); 
+  
+ try { 
+ // 2. Iniciamos transacción (ACID)
+
+ em.getTransaction().begin(); 
+  
+ // 3. Guardamos el objeto 
+ em.persist(dev); 
+  
+ // 4. Confirmamos cambios (Volcado a disco) 
+ em.getTransaction().commit(); 
+ } finally { 
+ // 5. Cerramos SIEMPRE el gestor para liberar recursos 
+ if (em.isOpen()) { 
+ em.close(); 
+ } 
+ } 
+} 
