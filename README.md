@@ -1,21 +1,31 @@
 # DevSquad Talent Management System
 
-Backend service component developed in Java for managing software development talent structures, utilizing persistence architecture and clean design patterns.
+Java backend project for managing software development team members and their information through a command-line interface.
 
-## 🚀 Project Overview
-This repository contains a structured Java component designed to handle CRUD (Create, Read, Update, Delete) operations for developer management. The architecture is cleanly divided into decoupled layers to ensure scalability and maintainability.
+The project was developed as part of my learning process in Java, object-oriented programming and persistence with JPA/Hibernate.
 
-The application features a responsive Command Line Interface (CLI) for executing administrative operations while maintaining solid backend separation.
+## 🚀 Technologies
 
-## 🏗️ Architecture & Design Patterns
-The project strictly implements a **layered architecture** to separate business logic from data access components:
+- Java
+- JPA
+- Hibernate
+- Maven
+- XML configuration
+- IntelliJ IDEA / Visual Studio Code
 
-*   **`app` (Controller/Runner Layer):** Houses the main execution entry points (`Main.java`) and the interactive `MenuHandler` logic to parse user commands securely.
-*   **`modelo` (Domain Layer):** Encapsulates core business entities (e.g., `Desarrollador`) mapping the system data models.
-*   **`persistencia` (Data Access Layer):** Implements the **DAO (Data Access Object)** pattern alongside **JPA (Java Persistence API)** to manage clean object-relational mapping and database transactions without raw SQL injection overhead.
+## 🏗️ Project structure
 
-## 🛠️ Tech Stack
-*   **Core Language:** Java
-*   **Persistence Standards:** JPA (Java Persistence API) / Hibernate
-*   **Configuration:** Structured XML Metadata Management (`persistence.xml`)
-*   **IDE Context:** Configured environment ready for Visual Studio Code / IntelliJ IDEA
+The project is organized into separated layers:
+
+```text
+├── app/
+│   └── Application and command-line interaction
+│
+├── modelo/
+│   └── Domain entities
+│
+├── persistencia/
+│   └── Data access and persistence
+│
+└── tickets/
+    └── Ticket-related functionality
